@@ -1,0 +1,37 @@
+
+# Using sample data mpg, playing around with features of ggplot2
+
+mpg
+
+ggplot(data = mpg)
+
+# Below three point to same thing. ggplot(DATA) + geom(mapping = aes(MAPPING))
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+ggplot(data = mpg, aes(x = displ, y = hwy)) + geom_point()
+ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
+
+# Adding layer to the plot by adding features to AES
+
+ggplot(mpg) + geom_point(mapping = aes(x = displ, y = hwy, color = class))
+ggplot(mpg) + geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
+ggplot(mpg) + geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+
+# Features set outside the AES will impact whole, not categories
+ggplot(mpg) + geom_point(mapping = aes(x = displ, y = hwy, alpha = class), color = "blue", size = 1)
+
+ggplot(mpg) + geom_point(mapping = aes(x = displ, y = hwy, stroke = displ))
+
+# Using facet_wrap. ~ var is categories, and nrow is number of rows on displayed panels
+ggplot(mpg) + geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)
+
+# Facet grids
+ggplot(mpg) + geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_grid(. ~ cyl)
+
+ggplot(mpg) + geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_grid(drv ~ cyl)
+
+
